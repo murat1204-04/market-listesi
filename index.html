@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#176b55">
+<title>Sesli Karekodlu Akıllı Market</title>
+<style>
+  :root { --bg:#f3f7f5; --card:#ffffff; --text:#17332b; --muted:#60756d; --accent:#176b55; --accent2:#e0f2e9; --border:#dce8e1; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; background:var(--bg); color:var(--text); }
+  header { background:linear-gradient(135deg,#176b55,#24966f); color:white; padding:28px 16px 24px; text-align:center; }
+  header .icon { font-size:42px; }
+  h1 { margin:8px 0 6px; font-size:clamp(1.45rem,5vw,2rem); }
+  header p { margin:0 auto; max-width:560px; opacity:.94; }
+  main { width:min(980px,100%); margin:0 auto; padding:18px 14px 36px; }
+  .intro { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:15px; margin-bottom:18px; }
+  .intro strong { display:block; margin-bottom:4px; }
+  .controls { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+  button { font:inherit; cursor:pointer; border:0; border-radius:12px; padding:11px 14px; font-weight:650; }
+  .primary { background:var(--accent); color:white; }
+  .secondary { background:var(--accent2); color:var(--text); border:1px solid var(--border); }
+  .category { margin:22px 0 10px; font-size:1.15rem; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(145px,1fr)); gap:12px; }
+  .product { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:14px 12px; text-align:left; color:var(--text); min-height:145px; display:flex; flex-direction:column; align-items:flex-start; transition:transform .12s,box-shadow .12s; }
+  .product:active { transform:scale(.98); }
+  .product .emoji { font-size:31px; margin-bottom:8px; }
+  .product .name { font-weight:700; line-height:1.25; }
+  .product .price { color:var(--accent); font-size:1.08rem; font-weight:800; margin-top:auto; padding-top:9px; }
+  .product .listen { color:var(--muted); font-size:.82rem; margin-top:3px; }
+  #status { margin-top:12px; min-height:1.4em; color:var(--accent); font-weight:600; }
+  footer { text-align:center; color:var(--muted); padding:0 12px 24px; font-size:.85rem; }
+  @media (prefers-color-scheme:dark) {
+    :root { --bg:#101a16; --card:#182720; --text:#e7f3ec; --muted:#a8beb1; --accent:#55c49a; --accent2:#203d30; --border:#2a4437; }
+    .product .price { color:#72d8ad; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="icon" aria-hidden="true">🛒</div>
+  <h1>Sesli Karekodlu Akıllı Market</h1>
+  <p>Ürünü seç, adını ve fiyatını Türkçe sesli dinle.</p>
+</header>
+<main>
+  <section class="intro">
+    <strong>Nasıl kullanılır?</strong>
+    İstediğin ürün kartına dokun. Telefon ürünün adını ve fiyatını sesli okuyacaktır. Ses ilk kez çalışmazsa önce “Sesi etkinleştir” düğmesine dokun.
+    <div class="controls">
+      <button class="primary" id="enableVoice" type="button">🔊 Sesi etkinleştir</button>
+      <button class="secondary" id="stopVoice" type="button">■ Sesi durdur</button>
+    </div>
+    <div id="status" role="status" aria-live="polite">Ürün seçmeye hazırsın.</div>
+  </section>
+
+  <h2 class="category">✏️ Kırtasiye malzemeleri</h2>
+  <section class="grid" aria-label="Kırtasiye malzemeleri">
+    <button class="product" data-name="Defter" data-price="25"><span class="emoji">📓</span><span class="name">Defter</span><span class="price">25 TL</span><span class="listen">🔊 Dinlemek için dokun</span></button>
+    <button class="product" data-name="Kurşun kalem" data-price="10"><span class="emoji">✏️</span><span class="name">Kurşun kalem</span><span class="price">10 TL</span><span class="listen">🔊 Dinlemek için dokun</span></button>
+    <button class="product" data-name="Silgi" data-price="5"><span class="emoji">🧽</span><span class="name">Silgi</span><span class="price">5 TL</span><span class="listen">🔊 Dinlemek için dokun</span></button>
+    <button class="product" data-name="Kalemtıraş" data-price="8"><span class="emoji">🖍️</span><span class="name">Kalemtıraş</span><span class="price">8 TL</span><span class="listen">🔊 Dinlemek için dokun</span></button>
+    <button class="product" data-name="Cetvel" data-price="12"><span class="emoji">📏</span><span class="name">Cetvel</span><span class="price">12 TL</span><span class="listen">🔊 Dinlemek için dokun</span></button>
+  </section>
+
+  <h2 class="category">🥤 İçecekler</h2>
+  <section class="grid" aria-label="İçecekler">
+    <button class="product" data-name="Su" data-price="5"><span class="emoji">💧</span><span class="name">Su</span><span class="price">5 TL</span><span class="listen">🔊 Dinlemek için dokun</span></button>
+    <button class="product" data-name="Meyve suyu" data-price="18"><span class="emoji">🧃</span><span class="name">Meyve suyu</span><span class="price">18 TL</span><span class="listen">🔊 Dinlemek için dokun</span></button>
+    <button class="product" data-name="Süt" data-price="20"><span class="emoji">🥛</span><span class="name">Süt</span><span class="price">20 TL</span><span class="listen">🔊 Dinlemek için dokun</span></button>
+  </section>
+
+  <h2 class="category">🍎 Yiyecekler</h2>
+  <section class="grid" aria-label="Yiyecekler">
+    <button class="product" data-name="Elma" data-price="10"><span class="emoji">🍎</span><span class="name">Elma</span><span class="price">10 TL</span><span class="listen">🔊 Dinlemek için dokun</span></button>
+    <button class="product" data-name="Muz" data-price="15"><span class="emoji">🍌</span><span class="name">Muz</span><span class="price">15 TL</span><span class="listen">🔊 Dinlemek için dokun</span></button>
+    <button class="product" data-name="Sandviç" data-price="35"><span class="emoji">🥪</span><span class="name">Sandviç</span><span class="price">35 TL</span><span class="listen">🔊 Dinlemek için dokun</span></button>
+    <button class="product" data-name="Bisküvi" data-price="12"><span class="emoji">🍪</span><span class="name">Bisküvi</span><span class="price">12 TL</span><span class="listen">🔊 Dinlemek için dokun</span></button>
+  </section>
+</main>
+<footer>Okul sergisi için örnek ürün ve fiyat listesi. Fiyatlar örnek amaçlıdır.</footer>
+<script>
+(function () {
+  const status = document.getElementById('status');
+  let voices = [];
+  function loadVoices() { voices = window.speechSynthesis ? window.speechSynthesis.getVoices() : []; }
+  if ('speechSynthesis' in window) {
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+  }
+  function chooseTurkishVoice() {
+    const tr = voices.filter(v => /^tr([-_]|$)/i.test(v.lang));
+    return tr.find(v => /female|kadın|woman|filiz|emel|yelda/i.test(v.name)) || tr[0] || null;
+  }
+  function speak(text) {
+    if (!('speechSynthesis' in window)) {
+      status.textContent = 'Bu tarayıcı sesli okumayı desteklemiyor. Lütfen güncel Chrome veya Safari deneyin.';
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'tr-TR';
+    utterance.rate = 0.88;
+    utterance.pitch = 1.08;
+    const voice = chooseTurkishVoice();
+    if (voice) utterance.voice = voice;
+    utterance.onstart = () => { status.textContent = 'Sesli okunuyor: ' + text; };
+    utterance.onend = () => { status.textContent = 'Dinleme tamamlandı. Başka bir ürün seçebilirsin.'; };
+    utterance.onerror = () => { status.textContent = 'Ses açılamadı. “Sesi etkinleştir” düğmesine tekrar dokun.'; };
+    window.speechSynthesis.speak(utterance);
+  }
+  document.querySelectorAll('.product').forEach(button => {
+    button.addEventListener('click', () => {
+      const name = button.dataset.name;
+      const price = button.dataset.price;
+      speak(name + '. Fiyatı ' + price + ' Türk lirası.');
+    });
+  });
+  document.getElementById('enableVoice').addEventListener('click', () => speak('Sesli markete hoş geldin. Dinlemek istediğin ürüne dokun.'));
+  document.getElementById('stopVoice').addEventListener('click', () => {
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    status.textContent = 'Ses durduruldu.';
+  });
+})();
+</script>
+</body>
+</html>
